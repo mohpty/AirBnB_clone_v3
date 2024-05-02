@@ -8,7 +8,7 @@ from fabric.operations import run, put, sudo, local
 from datetime import datetime
 import os
 
-env.hosts = ['66.70.184.249', '54.210.138.75']
+env.hosts = ['54.162.94.221', '54.236.17.236']
 created_path = None
 
 
@@ -23,7 +23,7 @@ def do_pack():
         local("tar --create --verbose -z --file={} ./web_static"
               .format(file_name))
         return file_name
-    except:
+    except c:
         return None
 
 
@@ -50,7 +50,7 @@ def do_deploy(archive_path):
         run("ln -sf {}/{} /data/web_static/current"
             .format(path, folder[0]))
         return True
-    except:
+    except c:
         return False
 
 

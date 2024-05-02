@@ -5,7 +5,7 @@
 from fabric.api import *
 from fabric.operations import run, put, sudo
 import os
-env.hosts = ['66.70.184.249', '54.210.138.75']
+env.hosts = ['54.162.94.221', '54.236.17.236']
 
 
 def do_deploy(archive_path):
@@ -31,5 +31,5 @@ def do_deploy(archive_path):
         run("ln -sf {}/{} /data/web_static/current"
             .format(path, folder[0]))
         return True
-    except:
+    except c:
         return False

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Command interpreter for Holberton AirBnB project
+    Command interpreter for ALX AirBnB project
 """
 import cmd
 from models import storage, CNC
@@ -24,18 +24,18 @@ class HBNBCommand(cmd.Cmd):
         """
         handles intro to command interpreter
         """
-        print('.----------------------------.')
-        print('|    Welcome to hbnb CLI!    |')
-        print('|   for help, input \'help\'   |')
-        print('|   for quit, input \'quit\'   |')
-        print('.----------------------------.')
+        print('.      -----------------     .')
+        print('|--  Welcome to hbnb CLI!  --|')
+        print('|   for help, input \'help\' |')
+        print('|   for quit, input \'quit\' |')
+        print('.      -----------------     .')
 
     def postloop(self):
         """
         handles exit to command interpreter
         """
         print('.----------------------------.')
-        print('|  Well, that sure was fun!  |')
+        print('|  Thank you, see you again!  |')
         print('.----------------------------.')
 
     def default(self, line):
@@ -43,17 +43,17 @@ class HBNBCommand(cmd.Cmd):
         default response for unknown commands
         """
         print("This \"{}\" is invalid, run \"help\" "
-              "for more explanations".format(line))
+              "for more info".format(line))
 
     def emptyline(self):
         """
-        Called when an empty line is entered in response to the prompt.
+            Called when an empty line is entered in response to the prompt.
         """
         pass
 
     def __class_err(self, arg):
         """
-        private: checks for missing class or unknown class
+            private: checks for missing class or unknown class
         """
         error = 0
         if len(arg) == 0:
@@ -69,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
 
     def __id_err(self, arg):
         """
-        private checks for missing ID or unknown ID
+            private checks for missing ID or unknown ID
         """
         error = 0
         if (len(arg) < 2):
@@ -86,16 +86,9 @@ class HBNBCommand(cmd.Cmd):
         return error
 
     def do_airbnb(self, arg):
-        """airbnb: airbnb
-        SYNOPSIS: Command changes prompt string"""
-        print("                      __ ___                        ")
-        print("    _     _  _ _||\ |/  \ | _  _  _|_|_     _  _ _| ")
-        print("|_||_)\)/(_|| (_|| \|\__/ || )(_)| |_| )\)/(_|| (_| ")
-        print("   |                                                ")
-        if HBNBCommand.prompt == '(hbnb) ':
-            HBNBCommand.prompt = " /_ /_ _  /_\n/ //_// //_/ "
-        else:
-            HBNBCommand.prompt = '(hbnb) '
+        """
+            airbnb: airbnb
+            Command changes prompt string"""
         arg = arg.split()
         error = self.__class_err(arg)
 
@@ -112,16 +105,17 @@ class HBNBCommand(cmd.Cmd):
 
     def __isfloat(self, val):
         """
-        checks if a string may be converted to a float
+            checks if a string may be converted to a float
         """
         try:
             float(val)
             return True
-        except:
+        except c:
             return False
 
     def __update_val(self, v):
-        """updates string to proper type, either int, float, or
+        """
+            updates string to proper type, either int, float, or
         string with proper spaces and " symbols"""
         if v[0] == '"' and v[-1] == '"':
             v = v[1:-1]
@@ -147,14 +141,8 @@ class HBNBCommand(cmd.Cmd):
         return attr_dict
 
     def do_create(self, arg):
-        """create: create [ARG] [PARAM 1] [PARAM 2] ...
-        ARG = Class Name
-        PARAM = <key name>=<value>
-                value syntax: "<value>"
-        SYNOPSIS: Creates a new instance of the Class from given input ARG
-                  and PARAMS. Key in PARAM = an instance attribute.
-        EXAMPLE: create City name="Chicago"
-                 City.create(name="Chicago")
+        """
+            create: create [ARG] [PARAM 1] [PARAM 2] ...
         """
         arg = arg.split()
         error = self.__class_err(arg)
@@ -171,10 +159,9 @@ class HBNBCommand(cmd.Cmd):
         print(my_obj.id)
 
     def do_show(self, arg):
-        """show: show [ARG] [ARG1]
-        ARG = Class
-        ARG1 = ID #
-        SYNOPSIS: Prints object of given ID from given Class"""
+        """
+            show: show [ARG] [ARG1]
+            Prints object of given ID from given Class"""
         arg = arg.split()
         error = self.__class_err(arg)
         if not error:
@@ -186,11 +173,9 @@ class HBNBCommand(cmd.Cmd):
                     print(v)
 
     def do_all(self, arg):
-        """all: all [ARG]
-        ARG = Class
-        SYNOPSIS: prints all objects of given class
-        EXAMPLE: all City
-                 City.all()
+        """
+            all: all [ARG]
+            prints all objects of given class
         """
         arg = arg.split()
         error = 0
@@ -199,25 +184,22 @@ class HBNBCommand(cmd.Cmd):
             if error:
                 return
         print('[', end='')
-        l = 0
+        idx = 0
         if arg:
             storage_objs = storage.all(arg[0])
         else:
             storage_objs = storage.all()
-        l = len(storage_objs)
-        c = 0
+        idx = len(storage_objs)
+        cidx = 0
         for v in storage_objs.values():
-            c += 1
+            cidx += 1
             print(v, end=(', ' if c < l else ''))
         print(']')
 
     def do_destroy(self, arg):
-        """destroy: destroy [ARG] [ARG1]
-        ARG = Class
-        ARG1 = ID #
-        SYNOPSIS: destroys object of given ID from given Class
-        EXAMPLE: destroy City 1234-abcd-5678-efgh
-                 City.destroy(1234-abcd-5678-efgh)
+        """
+            destroy: destroy [ARG] [ARG1]
+            destroys object of given ID from given Class
         """
         arg = arg.split()
         error = self.__class_err(arg)
@@ -232,24 +214,24 @@ class HBNBCommand(cmd.Cmd):
         to_delete.delete()
         storage.save()
 
-    def __rremove(self, s, l):
+    def __rremove(self, s, lis):
         """
-        private: removes characters in the input list from input string
+            private: removes characters in the input list from input string
         """
-        for c in l:
+        for c in lis:
             s = s.replace(c, '')
         return s
 
     def __check_dict(self, arg):
         """
-        private: checks if the arguments input has a dictionary
+            private: checks if the arguments input has a dictionary
         """
         if '{' and '}' in arg:
-            l = arg.split('{')[1]
-            l = l.split(', ')
-            l = list(s.split(':') for s in l)
+            lis = arg.split('{')[1]
+            lis = lis.split(', ')
+            lis = list(s.split(':') for s in lis)
             d = {}
-            for subl in l:
+            for subl in lis:
                 k = subl[0].strip('"\' {}')
                 v = subl[1].strip('"\' {}')
                 d[k] = v
@@ -259,7 +241,7 @@ class HBNBCommand(cmd.Cmd):
 
     def __handle_update_err(self, arg):
         """
-        private: checks for all errors in update
+            private: checks for all errors in update
         """
         d = self.__check_dict(arg)
         arg = self.__rremove(arg, [',', '"'])
@@ -283,15 +265,9 @@ class HBNBCommand(cmd.Cmd):
         return [0]
 
     def do_update(self, arg):
-        """update: update [ARG] [ARG1] [ARG2] [ARG3]
-        ARG = Class
-        ARG1 = ID #
-        ARG2 = attribute name
-        ARG3 = value of new attribute
-        SYNOPSIS: updates or adds a new attribute and value of given Class
-        EXAMPLE: update City 1234-abcd-5678-efgh name Chicago
-                 City.update(1234-abcd-5678-efgh, name, Chicago)
-                 City.update(1234-abcd, {'name': 'Chicago', 'address': 'None'})
+        """
+            update: update [ARG] [ARG1] [ARG2] [ARG3]
+            updates or adds a new attribute and value of given Class
         """
         arg_inv = self.__handle_update_err(arg)
         if arg_inv[0]:
@@ -311,38 +287,45 @@ class HBNBCommand(cmd.Cmd):
                     storage_objs[key].bm_update({k: v})
 
     def do_BaseModel(self, arg):
-        """class method with .function() syntax
-        Usage: BaseModel.<command>(<id>)"""
+        """
+            class method with .function() syntax
+        """
         self.__parse_exec('BaseModel', arg)
 
     def do_Amenity(self, arg):
-        """class method with .function() syntax
-        Usage: Amenity.<command>(<id>)"""
+        """
+            class method with .function() syntax
+        """
         self.__parse_exec('Amenity', arg)
 
     def do_City(self, arg):
-        """class method with .function() syntax
-        Usage: City.<command>(<id>)"""
+        """
+            class method with .function() syntax
+        """
         self.__parse_exec('City', arg)
 
     def do_Place(self, arg):
-        """class method with .function() syntax
-        Usage: Place.<command>(<id>)"""
+        """
+            class method with .function() syntax
+        """
         self.__parse_exec('Place', arg)
 
     def do_Review(self, arg):
-        """class method with .function() syntax
-        Usage: Review.<command>(<id>)"""
+        """
+            class method with .function() syntax
+        """
         self.__parse_exec('Review', arg)
 
     def do_State(self, arg):
-        """class method with .function() syntax
-        Usage: State.<command>(<id>)"""
+        """
+            class method with .function() syntax
+        """
         self.__parse_exec('State', arg)
 
     def do_User(self, arg):
-        """class method with .function() syntax
-        Usage: User.<command>(<id>)"""
+        """
+            class method with .function() syntax
+       """
         self.__parse_exec('User', arg)
 
     def __count(self, arg):
@@ -357,7 +340,8 @@ class HBNBCommand(cmd.Cmd):
 
     def __parse_exec(self, c, arg):
         """
-        private: parses the input from .function() syntax, calls matched func
+            private: parses the input from
+            function() syntax, calls matched func
         """
         CMD_MATCH = {
             '.all': self.do_all,
@@ -378,8 +362,9 @@ class HBNBCommand(cmd.Cmd):
                     return
         self.default(arg)
 
+
 if __name__ == '__main__':
     """
-    MAIN Loop
+        main execution loop
     """
     HBNBCommand().cmdloop()
