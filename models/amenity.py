@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-'''
-    Implementation of the Amenity class
-'''
+"""
+    Amenity class definition
+"""
 from os import getenv
 from models.base_model import BaseModel, Base
 from models.place import place_amenity
@@ -10,9 +10,9 @@ from sqlalchemy.orm import relationship
 
 
 class Amenity(BaseModel, Base):
-    '''
+    """
         Implementation for the Amenities.
-    '''
+    """
     __tablename__ = "amenities"
     if getenv("HBNB_TYPE_STORAGE") == "db":
         name = Column(String(128), nullable=False)

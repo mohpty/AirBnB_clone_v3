@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-'''
+"""
     Define the class Place.
-'''
+"""
 from os import getenv
 from sqlalchemy import Column, String, Integer, Float, ForeignKey, Table
 from sqlalchemy.orm import relationship
@@ -18,9 +18,9 @@ place_amenity = Table('place_amenity', Base.metadata,
 
 
 class Place(BaseModel, Base):
-    '''
+    """
         Define the class Place that inherits from BaseModel.
-    '''
+    """
     __tablename__ = "places"
     if getenv("HBNB_TYPE_STORAGE", "fs") == "db":
         city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
@@ -53,10 +53,10 @@ class Place(BaseModel, Base):
 
         @property
         def reviews(self):
-            '''
+            """
                 Return list: review instances if Review.place_id==curr place.id
                 FileStorage relationship between Place and Review
-            '''
+            """
             list_reviews = []
             for review in models.storage.all(Review).values():
                 if review.place_id == self.id:
@@ -65,10 +65,10 @@ class Place(BaseModel, Base):
 
         @property
         def amenities(self):
-            '''
+            """
                 Return list: amenity inst's if Amenity.place_id=curr place.id
                 FileStorage many to many relationship between Place and Amenity
-            '''
+            """
             list_amenities = []
             for amenity in models.storage.all(Amenity).values():
                 if amenity.place_id == self.id:
@@ -77,10 +77,10 @@ class Place(BaseModel, Base):
 
         @amenities.setter
         def amenities(self, amenity=None):
-            '''
+            """
                 Set list: amenity instances if Amenity.place_id==curr place.id
                 Set by adding instance objs to amenity_ids attribute in Place
-            '''
+            """
             if amenity:
                 for amenity in models.storage.all(Amenity).values():
                     if amenity.place_id == self.id:

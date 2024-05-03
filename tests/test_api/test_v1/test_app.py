@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+"""test creation of app instance"""
 import os
 from api.v1.app import app
 from api.v1.views import *
@@ -7,14 +9,14 @@ import flask
 
 
 class AppTestCase(unittest.TestCase):
-    '''test app.py'''
+    """test app.py"""
 
     def test_create_app(self):
-        '''check app instance with blueprint is created'''
+        """check that app instance with blueprint is created"""
         with app.test_client() as c:
             self.assertIsInstance(c, flask.testing.FlaskClient)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
 

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''testing the index route'''
+"""testing the index route"""
 import unittest
 import pep8
 from os import getenv
@@ -13,9 +13,9 @@ from models import storage
 
 
 class TestCities(unittest.TestCase):
-    '''test city'''
+    """test city"""
     def test_lists_cities_of_state(self):
-        '''test cities GET route'''
+        """test cities GET route"""
         with app.test_client() as c:
             new_state = State(name="Beckystan")
             storage.new(new_state)
@@ -27,7 +27,7 @@ class TestCities(unittest.TestCase):
             self.assertEqual(resp.status_code, 200)
 
     def test_create_city(self):
-        '''test city POST route'''
+        """test city POST route"""
         with app.test_client() as c:
             new_state = State(name="Beckystan")
             storage.new(new_state)
@@ -39,7 +39,7 @@ class TestCities(unittest.TestCase):
             self.assertEqual(resp.status_code, 201)
 
     def test_delete_city(self):
-        '''test city DELETE route'''
+        """test city DELETE route"""
         with app.test_client() as c:
             new_state = State(name="Beckystan")
             storage.new(new_state)
@@ -53,7 +53,7 @@ class TestCities(unittest.TestCase):
             self.assertEqual(resp2.status_code, 404)
 
     def test_get_city(self):
-        '''test city GET by id route'''
+        """test city GET by id route"""
         with app.test_client() as c:
             new_state = State(name="Beckystan")
             storage.new(new_state)
@@ -63,7 +63,7 @@ class TestCities(unittest.TestCase):
             self.assertEqual(resp.status_code, 200)
 
     def test_update_city(self):
-        '''test city PUT route'''
+        """test city PUT route"""
         with app.test_client() as c:
             new_state = State(name="Beckystan")
             storage.new(new_state)

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''testing the index route'''
+"""testing the index route"""
 import unittest
 import pep8
 from os import getenv
@@ -15,9 +15,9 @@ from models import storage
 
 
 class TestPlaces(unittest.TestCase):
-    '''test city'''
+    """test city"""
     def test_lists_places_of_city(self):
-        '''test places GET route'''
+        """test places GET route"""
         with app.test_client() as c:
             new_state = State(name="Beckystan")
             storage.new(new_state)
@@ -38,7 +38,7 @@ class TestPlaces(unittest.TestCase):
             self.assertEqual(resp.status_code, 200)
 
     def test_create_place(self):
-        '''test place POST route'''
+        """test place POST route"""
         with app.test_client() as c:
             new_state = State(name="Beckystan")
             storage.new(new_state)
@@ -68,7 +68,7 @@ class TestPlaces(unittest.TestCase):
             self.assertEqual(resp.status_code, 201)
 
     def test_delete_place(self):
-        '''test place DELETE route'''
+        """test place DELETE route"""
         with app.test_client() as c:
             new_state = State(name="Beckystan")
             storage.new(new_state)
@@ -91,7 +91,7 @@ class TestPlaces(unittest.TestCase):
             self.assertEqual(resp2.status_code, 404)
 
     def test_get_place(self):
-        '''test place GET by id route'''
+        """test place GET by id route"""
         with app.test_client() as c:
             new_state = State(name="Beckystan")
             storage.new(new_state)
@@ -110,7 +110,8 @@ class TestPlaces(unittest.TestCase):
             self.assertEqual(resp.status_code, 200)
 
     def test_update_place(self):
-        '''test place PUT route'''
+        """test place PUT route"""
+
         with app.test_client() as c:
             new_state = State(name="Beckystan")
             storage.new(new_state)
@@ -133,5 +134,5 @@ class TestPlaces(unittest.TestCase):
             self.assertEqual(resp.status_code, 200)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

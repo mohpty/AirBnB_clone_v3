@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-'''
+"""
     Define the class City.
-'''
+"""
 from os import getenv
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
@@ -11,9 +11,9 @@ from models.state import State
 
 
 class City(BaseModel, Base):
-    '''
-        Define the class City that inherits from BaseModel.
-    '''
+    """
+        Define the class City.
+    """
     __tablename__ = "cities"
     if getenv("HBNB_TYPE_STORAGE") == "db":
         name = Column(String(128), nullable=False)

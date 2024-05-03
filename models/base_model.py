@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-'''
+"""
     This module defines the BaseModel class
-'''
+"""
 from os import getenv
 import uuid
 from datetime import datetime
@@ -14,17 +14,17 @@ Base = declarative_base()
 
 
 class BaseModel:
-    '''
+    """
         Base class for other classes to be used for the duration.
-    '''
+    """
     id = Column(String(60), nullable=False, primary_key=True)
     created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
 
     def __init__(self, *args, **kwargs):
-        '''
+        """
             Initialize public instance attributes.
-        '''
+        """
         if (len(kwargs) == 0):
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -47,31 +47,31 @@ class BaseModel:
                 self.id = str(uuid.uuid4())
 
     def __str__(self):
-        '''
+        """
             Return string representation of BaseModel class
-        '''
+        """
         return ("[{}] ({}) {}".format(self.__class__.__name__,
                                       self.id, self.__dict__))
 
     def __repr__(self):
-        '''
+        """
             Return string representation of BaseModel class
-        '''
+        """
         return ("[{}] ({}) {}".format(self.__class__.__name__,
                                       self.id, self.__dict__))
 
     def save(self):
-        '''
+        """
             Update the updated_at attribute with new.
-        '''
+        """
         self.updated_at = datetime.now()
         models.storage.new(self)
         models.storage.save()
 
     def to_dict(self):
-        '''
+        """
             Return dictionary representation of BaseModel class.
-        '''
+        """
         cp_dct = dict(self.__dict__)
         cp_dct['__class__'] = self.__class__.__name__
         cp_dct['updated_at'] = self.updated_at.strftime("%Y-%m-%dT%H:%M:%S.%f")
@@ -81,7 +81,7 @@ class BaseModel:
         return (cp_dct)
 
     def delete(self):
-        '''
+        """
             Deletes an object
-        '''
+        """
         models.storage.delete(self)

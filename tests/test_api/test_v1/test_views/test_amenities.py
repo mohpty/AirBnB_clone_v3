@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''testing the index route'''
+"""testing the index route"""
 import unittest
 import pep8
 from os import getenv
@@ -12,9 +12,9 @@ from models import storage
 
 
 class TestAmenities(unittest.TestCase):
-    '''test amenity'''
+    """test amenity"""
     def test_lists_amenities(self):
-        '''test amenity GET route'''
+        """test amenity GET route"""
         with app.test_client() as c:
             resp = c.get('/api/v1/amenities')
             self.assertEqual(resp.status_code, 200)
@@ -22,7 +22,7 @@ class TestAmenities(unittest.TestCase):
             self.assertEqual(resp.status_code, 200)
 
     def test_create_amenity(self):
-        '''test amenity POST route'''
+        """test amenity POST route"""
         with app.test_client() as c:
             resp = c.post('/api/v1/amenities/',
                           data=json.dumps({"name": "treehouse"}),
@@ -30,7 +30,7 @@ class TestAmenities(unittest.TestCase):
             self.assertEqual(resp.status_code, 201)
 
     def test_delete_amenity(self):
-        '''test amenity DELETE route'''
+        """test amenity DELETE route"""
         with app.test_client() as c:
             new_amenity = Amenity(name="3 meals a day")
             storage.new(new_amenity)
@@ -42,7 +42,7 @@ class TestAmenities(unittest.TestCase):
             self.assertEqual(resp2.status_code, 404)
 
     def test_get_amenity(self):
-        '''test amenity GET by id route'''
+        """test amenity GET by id route"""
         with app.test_client() as c:
             new_amenity = Amenity(name="3 meals a day")
             storage.new(new_amenity)
@@ -50,15 +50,13 @@ class TestAmenities(unittest.TestCase):
             self.assertEqual(resp.status_code, 200)
 
     def test_update_amenity(self):
-        '''test amenity PUT route'''
+        """test amenity PUT route"""
         with app.test_client() as c:
             new_amenity = Amenity(name="3 meals a day")
             storage.new(new_amenity)
             resp = c.put('api/v1/amenities/{}'.format(new_amenity.id),
                          data=json.dumps({"name": "2 meals a day"}),
                          content_type="application/json")
-            # data = json.loads(resp.data.decode('utf-8'))
-            # print(data)
             self.assertEqual(resp.status_code, 200)
 
 
